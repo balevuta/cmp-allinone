@@ -57,7 +57,6 @@ fun App() {
                     setTabs()
                 }
             }
-
         }
     }
 }
