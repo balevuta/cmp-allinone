@@ -6,15 +6,21 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ProductsResponse(
     @SerialName("products")
-    var list: List<Product>
+    val products: List<ProductDto>,
+    @SerialName("total")
+    val total: Int = 0,
+    @SerialName("skip")
+    val skip: Int = 0,
+    @SerialName("limit")
+    val limit: Int = 0
 )
 
 @Serializable
-data class Product(
+data class ProductDto(
     @SerialName("id")
-    var id: Int = 0,
+    val id: Int = 0,
     @SerialName("title")
-    var title: String = "",
+    val title: String = "",
     @SerialName("description")
     val description: String = "",
     @SerialName("price")
@@ -32,8 +38,5 @@ data class Product(
     @SerialName("rating")
     val rating: Double = 0.0,
     @SerialName("images")
-    val images: List<String>? = null,
-    var isFavourite: Boolean? = false,
-    var isAddtoCart: Boolean? = false,
-    var quantity: Int? = 0,
+    val images: List<String> = emptyList()
 )

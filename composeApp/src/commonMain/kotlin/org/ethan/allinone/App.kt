@@ -1,16 +1,9 @@
 package org.ethan.allinone
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
@@ -21,7 +14,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
@@ -30,13 +22,14 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabDisposable
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import org.ethan.allinone.di.appModule
-import org.ethan.allinone.theme.AllInOneTheme
-import org.ethan.allinone.theme.AppColors
-import org.ethan.allinone.ui.tabs.CartTab
-import org.ethan.allinone.ui.tabs.HomeTab
-import org.ethan.allinone.ui.tabs.ProfileTab
-import org.ethan.allinone.ui.tabs.SupportTab
+import org.ethan.allinone.core.di.appModule
+import org.ethan.allinone.presentation.theme.AllInOneTheme
+import org.ethan.allinone.presentation.theme.AppColors
+import org.ethan.allinone.presentation.ui.ProductsScreen
+import org.ethan.allinone.presentation.ui.tabs.CartTab
+import org.ethan.allinone.presentation.ui.tabs.HomeTab
+import org.ethan.allinone.presentation.ui.tabs.ProfileTab
+import org.ethan.allinone.presentation.ui.tabs.SupportTab
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
 
@@ -47,16 +40,17 @@ fun App() {
         modules(appModule())
     }) {
         AllInOneTheme {
-            Box(
-                modifier = Modifier.fillMaxSize().background(AppColors.lightBellBlue)
-                    .windowInsetsPadding(WindowInsets.safeDrawing)
-            ) {
-                Column(
-                    Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    setTabs()
-                }
-            }
+            ProductsScreen()
+//            Box(
+//                modifier = Modifier.fillMaxSize().background(AppColors.lightBellBlue)
+//                    .windowInsetsPadding(WindowInsets.safeDrawing)
+//            ) {
+//                Column(
+//                    Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
+//                ) {
+//                    setTabs()
+//                }
+//            }
         }
     }
 }
@@ -96,7 +90,8 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
     val tabNavigator = LocalTabNavigator.current
     val selectedTab = tabNavigator.current == tab
 
-    BottomNavigationItem(selected = tabNavigator.current.key == tab.key,
+    BottomNavigationItem(
+        selected = tabNavigator.current.key == tab.key,
         onClick = {
             tabNavigator.current = tab
         },
