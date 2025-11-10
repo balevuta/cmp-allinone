@@ -1,0 +1,32 @@
+CREATE TABLE product (
+    id INTEGER NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    price REAL NOT NULL,
+    discount_percentage REAL NOT NULL,
+    category TEXT NOT NULL,
+    thumbnail TEXT NOT NULL,
+    brand TEXT NOT NULL,
+    stock INTEGER NOT NULL,
+    rating REAL NOT NULL,
+    images TEXT NOT NULL
+);
+
+insertProduct:
+INSERT OR REPLACE INTO product (
+    id, title, description, price, discount_percentage, category,
+    thumbnail, brand, stock, rating, images
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+getAllProducts:
+SELECT * FROM product ORDER BY id;
+
+getProductById:
+SELECT * FROM product WHERE id = ?;
+
+deleteAllProducts:
+DELETE FROM product;
+
+deleteProductById:
+DELETE FROM product WHERE id = ?;
+

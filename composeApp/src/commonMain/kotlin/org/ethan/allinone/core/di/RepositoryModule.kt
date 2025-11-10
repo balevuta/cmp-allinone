@@ -7,5 +7,10 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     factory { HomeRepository(get()) }
-    factory<ProductRepository> { ProductRepositoryImpl(get()) }
+    factory<ProductRepository> {
+        ProductRepositoryImpl(
+            remoteDataSource = get(),
+            localDataSource = get()
+        )
+    }
 }

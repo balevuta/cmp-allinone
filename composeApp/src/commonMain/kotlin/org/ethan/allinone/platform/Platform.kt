@@ -1,5 +1,6 @@
 package org.ethan.allinone.platform
 
+import app.cash.sqldelight.db.SqlDriver
 import io.ktor.client.engine.HttpClientEngine
 import kotlinx.coroutines.CoroutineDispatcher
 
@@ -10,3 +11,7 @@ interface Platform {
 }
 
 expect fun getPlatform(): Platform
+
+expect class DatabaseDriverFactory {
+    fun createDriver(): SqlDriver
+}
